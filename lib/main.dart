@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'core/router/app_router.dart'; // <== import your router
+import 'core/router/app_router.dart'; // Your router file
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -15,7 +15,21 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp.router(
       title: 'JuruStay App',
-      routerConfig: AppRouter.router, // Use the router you define in app_router.dart
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+        scaffoldBackgroundColor: Colors.white,
+        appBarTheme: const AppBarTheme(
+          backgroundColor: Colors.blue,
+          foregroundColor: Colors.white,
+        ),
+        elevatedButtonTheme: ElevatedButtonThemeData(
+          style: ElevatedButton.styleFrom(
+            backgroundColor: Colors.blue,
+            foregroundColor: Colors.white,
+          ),
+        ),
+      ),
+      routerConfig: AppRouter.router, // ✅ Make sure this is correct
       debugShowCheckedModeBanner: false,
     );
   }

@@ -1,65 +1,67 @@
 import 'package:flutter/material.dart';
 
-class TouristPage extends StatelessWidget {
-  const TouristPage({Key? key}) : super(key: key);
+class GuidesPage extends StatefulWidget {
+  const GuidesPage({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    final formKey = GlobalKey<FormState>();
+  State<GuidesPage> createState() => _GuidesPageState();
+}
 
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Add Adventure'),
-        backgroundColor: const Color(0xFF88A2AF), // Figma color match
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Form(
-          key: formKey,
-          child: ListView(
-            children: [
-              _buildTextField(label: 'Adventure name'),
-              _buildTextField(label: 'Photo (URL or Upload)'),
-              _buildTextField(label: 'Location'),
-              _buildTextField(label: 'Price', keyboardType: TextInputType.number),
-              _buildTextField(label: 'Contacts'),
-              _buildTextField(label: 'Description', maxLines: 3),
-              const SizedBox(height: 20),
-              ElevatedButton(
-                onPressed: () {
-                  // TODO: Call BLoC submit
-                },
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color(0xFF50748C), // Button color
-                  padding: const EdgeInsets.symmetric(vertical: 16),
-                ),
-                child: const Text(
-                  'Submit',
-                  style: TextStyle(fontSize: 16),
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
+class _GuidesPageState extends State<GuidesPage> {
+  final _formKey = GlobalKey<FormState>();
+
+  String name = '', photo = '', location = '', price = '', contact = '', description = '';
+
+  void _submitForm() {
+    if (_formKey.currentState!.validate()) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text("Tour submitted")),
+      );
+      Navigator.pop(context);
+    }
+  }
+
+  InputDecoration _inputDecoration(String label) {
+    return InputDecoration(
+      labelText: label,
+      filled: true,
+      fillColor: Colors.white,
+      border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
     );
   }
 
-  Widget _buildTextField({
-    required String label,
-    TextInputType keyboardType = TextInputType.text,
-    int maxLines = 1,
-  }) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 8.0),
-      child: TextFormField(
-        keyboardType: keyboardType,
-        maxLines: maxLines,
-        decoration: InputDecoration(
-          labelText: label,
-          border: OutlineInputBorder(),
-          fillColor: const Color(0xFFF2F6F9),
-          filled: true,
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: const Color(0xFFB3C9D1), // your blue
+      appBar: AppBar(title: const Text("Submit Tour")),
+      body: Padding(
+        padding: const EdgeInsets.all(20),
+        child: Form(
+          key: _formKey,
+          child: Column(
+            children: [
+              TextFormField(decoration: _inputDecoration("Adventure name")),
+              const SizedBox(height: 12),
+              TextFormField(decoration: _inputDecoration("Photo")),
+              const SizedBox(height: 12),
+              TextFormField(decoration: _inputDecoration("Location")),
+              const SizedBox(height: 12),
+              TextFormField(decoration: _inputDecoration("Price")),
+              const SizedBox(height: 12),
+              TextFormField(decoration: _inputDecoration("Contacts")),
+              const SizedBox(height: 12),
+              TextFormField(
+                decoration: _inputDecoration("Description"),
+                maxLines: 3,
+              ),
+              const SizedBox(height: 24),
+              ElevatedButton(
+                onPressed: _submitForm,
+                child: const Text("Submit"),
+              ),
+            ],
+          ),
         ),
       ),
     );
