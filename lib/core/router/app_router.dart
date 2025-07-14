@@ -1,5 +1,5 @@
 import 'package:go_router/go_router.dart';
-import '../../features/tourist/presentation/pages/guide_page.dart';
+import '../../features/commissioner/presentation/pages/guides_page.dart';
 
 class AppRouter {
   static final router = GoRouter(
