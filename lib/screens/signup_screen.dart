@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'termsandagreements_screen.dart';
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({Key? key}) : super(key: key);
@@ -124,10 +125,21 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       ), // Blue button
                       padding: const EdgeInsets.symmetric(vertical: 16),
                     ),
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) =>
+                              const TermsAndAgreementsScreen(),
+                        ),
+                      );
+                    },
                     child: const Text(
                       'Sign Up',
-                      style: TextStyle(fontSize: 18),
+                      style: TextStyle(
+                        fontSize: 18,
+                        color: Color.fromARGB(221, 255, 255, 255),
+                      ),
                     ),
                   ),
                 ),
