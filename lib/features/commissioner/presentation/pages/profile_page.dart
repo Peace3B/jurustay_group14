@@ -1,7 +1,14 @@
 import 'package:flutter/material.dart';
 
-class ProfilePage extends StatelessWidget {
+class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
+
+  @override
+  State<ProfilePage> createState() => _ProfilePageState();
+}
+
+class _ProfilePageState extends State<ProfilePage> {
+  final TextEditingController _introController = TextEditingController(text: "Hello! I'm John, with over 10 years of experience...");
 
   Widget _sectionTitle(String title) {
     return Padding(
@@ -28,6 +35,22 @@ class ProfilePage extends StatelessWidget {
     );
   }
 
+  Widget _editableIntroCard() {
+    return Container(
+      padding: const EdgeInsets.all(10),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(12),
+      ),
+      child: TextFormField(
+        controller: _introController,
+        maxLines: 4,
+        decoration: const InputDecoration.collapsed(hintText: "Tell us about yourself"),
+        style: const TextStyle(fontSize: 14),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -39,7 +62,8 @@ class ProfilePage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             _sectionTitle("About Me"),
-            _infoCard("Introduction", "Hello! I'm John, with over 10 years of experience..."),
+            _editableIntroCard(),
+
             _sectionTitle("Saved Places"),
             GridView.count(
               shrinkWrap: true,
@@ -53,6 +77,7 @@ class ProfilePage extends StatelessWidget {
                 _infoCard("Cultural", "Historical landmark"),
               ],
             ),
+
             _sectionTitle("Past Bookings"),
             GridView.count(
               shrinkWrap: true,
@@ -66,12 +91,17 @@ class ProfilePage extends StatelessWidget {
                 _infoCard("Leisure", "Tropical Cruise – Completed"),
               ],
             ),
+
             const SizedBox(height: 20),
             Row(
               children: [
                 Expanded(
                   child: OutlinedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      setState(() {
+                        _introController.text = "";
+                      });
+                    },
                     style: OutlinedButton.styleFrom(backgroundColor: Colors.white),
                     child: const Text("Cancel"),
                   ),
@@ -79,7 +109,10 @@ class ProfilePage extends StatelessWidget {
                 const SizedBox(width: 10),
                 Expanded(
                   child: ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      final intro = _introController.text;
+                      print("Saved intro: $intro"); // You can later send to Firestore
+                    },
                     child: const Text("Save Changes"),
                   ),
                 ),

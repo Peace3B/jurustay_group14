@@ -12,7 +12,7 @@ class AppRouter {
     routes: [
       GoRoute(
         path: '/dashboard',
-        builder: (context, state) => const DashboardPage(),
+        builder: (context, state) => const CommissionerDashboardPage(),
       ),
       GoRoute(
         path: '/submit-tour',
