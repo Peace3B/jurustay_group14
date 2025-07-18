@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'popup.dart';
 
 class TermsAndAgreementsScreen extends StatefulWidget {
   const TermsAndAgreementsScreen({Key? key}) : super(key: key);
@@ -57,12 +58,15 @@ class _TermsAndAgreementsScreenState extends State<TermsAndAgreementsScreen> {
               child: ElevatedButton(
                 onPressed: isAgreed
                     ? () {
-                        // Handle navigation or saving agreement here
-                        Navigator.pop(context);
+                        showDialog(
+                          context: context,
+                          barrierDismissible: false,
+                          builder: (context) => const SignUpSuccessPopup(),
+                        );
                       }
                     : null,
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.blue,
+                  backgroundColor: const Color.fromARGB(255, 3, 80, 143),
                   padding: const EdgeInsets.symmetric(vertical: 16),
                 ),
                 child: const Text(
