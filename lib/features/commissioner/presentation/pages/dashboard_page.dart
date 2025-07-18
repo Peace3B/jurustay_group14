@@ -1,5 +1,5 @@
-
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart'; // ✅ Import GoRouter
 import '../widgets/profile_visits_chart.dart'; // Chart widget
 import '../widgets/stat_card.dart'; // For stat cards like total earnings, tours, etc.
 
@@ -52,7 +52,7 @@ class CommissionerDashboardPage extends StatelessWidget {
                 minimumSize: const Size.fromHeight(50),
               ),
               onPressed: () {
-                Navigator.pushNamed(context, '/guides');
+                context.go('/submit-tour'); // ✅ Correct GoRouter navigation
               },
               child: const Text('Submit New Tour'),
             ),
@@ -65,7 +65,7 @@ class CommissionerDashboardPage extends StatelessWidget {
                 minimumSize: const Size.fromHeight(50),
               ),
               onPressed: () {
-                Navigator.pushNamed(context, '/profile');
+                context.go('/profile'); // ✅ Correct GoRouter navigation
               },
               child: const Text('View Profile'),
             ),
